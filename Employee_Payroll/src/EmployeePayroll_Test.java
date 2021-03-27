@@ -7,7 +7,7 @@ public class EmployeePayroll_Test {
 
 	EmployeePayroll_DB employeePayrollService = new EmployeePayroll_DB();
 	
-
+	
 	@Test
 	public void givenEmployeePayrollInDB_WhenRetrieved_ShouldMatchEmployeeCount()
 	{
@@ -24,4 +24,14 @@ public class EmployeePayroll_Test {
 		boolean result = employeePayrollService.checkEmployeePayrollSyncWithDB("Terrisa");
 		Assert.assertTrue(result);
 	}
+	
+	
+		@Test
+		public void givenNewSalaryToEmployee_WhenUpdated_ShouldSyncWithDatabaseUsingPreparedStatement()
+		{
+			List<EmployeeData> employeePayrollData = employeePayrollService.readData();
+			employeePayrollService.updateEmployeeSalary("Terrisa",3000000.0);
+			boolean result = employeePayrollService.checkEmployeePayrollSyncWithDB("Terrisa");
+			Assert.assertTrue(result);
+		}
 }
